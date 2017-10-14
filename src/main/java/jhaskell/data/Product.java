@@ -15,7 +15,7 @@ public final class Product
     @Override
     public boolean equals(Object o)
     {
-        return Objects.equals(this.product, ((Product)o).product);
+        return Objects.equals(this.product, ((Product) o).product);
     }
 
     @Override
@@ -23,19 +23,5 @@ public final class Product
     {
         return Objects.hashCode(product);
     }
-
-    public static Monoid<Product> PRODUCT = new Monoid<Product>()
-    {
-        @Override
-        public Product mempty()
-        {
-            return new Product(0);
-        }
-
-        @Override
-        public Product mappend(final Product x, final Product y)
-        {
-            return new Product(x.product * y.product);
-        }
-    };
 }
+
