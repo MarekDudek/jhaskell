@@ -1,3 +1,6 @@
 Pure(er) Functional Programming in Java, Haskell-style
 
-Semigroup and Monoid.
+1. Semigroup and Monoid:
+* Sum
+* Product
+

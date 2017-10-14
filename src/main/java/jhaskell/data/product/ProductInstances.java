@@ -42,7 +42,6 @@ public enum ProductInstances
                 return new Product(p);
             }
         }
-
     }
 
     public static Monoid<Product> Monoid = new ProductMonoid();
