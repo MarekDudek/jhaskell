@@ -1,4 +1,4 @@
-package jhaskell;
+package jhaskell.product;
 
 import jhaskell.data.product.Product;
 import org.junit.Rule;

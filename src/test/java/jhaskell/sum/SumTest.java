@@ -1,4 +1,4 @@
-package jhaskell;
+package jhaskell.sum;
 
 import jhaskell.data.Sum;
 import org.junit.Test;
