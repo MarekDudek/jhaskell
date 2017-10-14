@@ -6,6 +6,10 @@ public enum ProductInstances
 
     ;
 
+    public static Semigroup<Product> SEMIGROUP2 = new ProductSemigroup();
+
+    public static Monoid<Product> MONOID2 = new ProductMonoid();
+
     public static Semigroup<Product> SEMIGROUP =
             (x, y) ->
                     new Product(x.product * y.product);

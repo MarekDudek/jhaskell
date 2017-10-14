@@ -13,9 +13,9 @@ public final class Product
     }
 
     @Override
-    public boolean equals(Object o)
+    public boolean equals(final Object that)
     {
-        return Objects.equals(this.product, ((Product) o).product);
+        return Objects.equals(this.product, ((Product) that).product);
     }
 
     @Override
