@@ -3,29 +3,31 @@ package jhaskell.data;
 public enum ProductInstances
 {
 
-
     ;
 
-    public static Semigroup<Product> SEMIGROUP2 = new ProductSemigroup();
+    public static Semigroup<Product> Semigroup = new ProductSemigroup();
 
-    public static Monoid<Product> MONOID2 = new ProductMonoid();
-
-    public static Semigroup<Product> SEMIGROUP =
-            (x, y) ->
-                    new Product(x.product * y.product);
-
-    public static Monoid<Product> MONOID = new Monoid<Product>()
+    private static class ProductSemigroup implements Semigroup<Product>
     {
+
+        @Override
+        public Product mappend(final Product x, final Product y)
+        {
+            return new Product(x.product * y.product);
+        }
+
+    }
+
+    public static Monoid<Product> Monoid = new ProductMonoid();
+
+    private static class ProductMonoid extends ProductSemigroup implements Monoid<Product>
+    {
+
         @Override
         public Product mempty()
         {
             return new Product(0);
         }
 
-        @Override
-        public Product mappend(final Product x, final Product y)
-        {
-            return SEMIGROUP.mappend(x, y);
-        }
-    };
+    }
 }
