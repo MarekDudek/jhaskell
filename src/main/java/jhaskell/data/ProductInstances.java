@@ -1,9 +1,17 @@
 package jhaskell.data;
 
-public enum ProductInstances implements Monoid<Product>
+public enum ProductInstances
 {
 
-    MONOID {
+
+    ;
+
+    public static Semigroup<Product> SEMIGROUP =
+            (x, y) ->
+                    new Product(x.product * y.product);
+
+    public static Monoid<Product> MONOID = new Monoid<Product>()
+    {
         @Override
         public Product mempty()
         {
@@ -13,7 +21,7 @@ public enum ProductInstances implements Monoid<Product>
         @Override
         public Product mappend(final Product x, final Product y)
         {
-            return new Product(x.product * y.product);
+            return SEMIGROUP.mappend(x, y);
         }
-    }
+    };
 }
