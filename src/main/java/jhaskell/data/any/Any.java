@@ -33,6 +33,6 @@ public final class Any
     @Override
     public String toString()
     {
-        return MoreObjects.toStringHelper(this).add("any", any).toString();
+        return MoreObjects.toStringHelper(this).add("all", any).toString();
     }
 }
