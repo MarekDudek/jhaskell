@@ -7,7 +7,7 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-public enum SumInstances
+public enum Sums
 {
 
     ;
@@ -59,7 +59,7 @@ public enum SumInstances
         @Override
         public Sum mconcat(List<Sum> sums)
         {
-            return sums.stream().reduce(Semigroup::mappend).orElse(Empty);
+            return sums.stream().reduce(this::mappend).orElse(mempty());
         }
     }
 }

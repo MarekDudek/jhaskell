@@ -7,7 +7,7 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-public enum ProductInstances
+public enum Products
 {
 
     ;
@@ -59,7 +59,7 @@ public enum ProductInstances
         @Override
         public Product mconcat(List<Product> products)
         {
-            return products.stream().reduce(Semigroup::mappend).orElse(Empty);
+            return products.stream().reduce(this::mappend).orElse(mempty());
         }
     }
 }

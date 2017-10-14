@@ -1,4 +1,4 @@
-package jhaskell.data;
+package jhaskell.data.utils;
 
 import java.util.List;
 

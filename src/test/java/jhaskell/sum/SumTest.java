@@ -4,10 +4,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static jhaskell.data.Util.list;
+import static jhaskell.data.utils.Util.list;
 import static jhaskell.data.sum.Sum.Sum;
-import static jhaskell.data.sum.SumInstances.Monoid;
-import static jhaskell.data.sum.SumInstances.Semigroup;
+import static jhaskell.data.sum.Sums.Monoid;
+import static jhaskell.data.sum.Sums.Semigroup;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

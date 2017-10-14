@@ -4,10 +4,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static jhaskell.data.Util.list;
 import static jhaskell.data.product.Product.Product;
-import static jhaskell.data.product.ProductInstances.Monoid;
-import static jhaskell.data.product.ProductInstances.Semigroup;
+import static jhaskell.data.product.Products.Monoid;
+import static jhaskell.data.product.Products.Semigroup;
+import static jhaskell.data.utils.Util.list;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -19,18 +19,6 @@ public final class ProductTest
     public void appending()
     {
         assertThat(Semigroup.mappend(Product(2), Product(3)), is(Product(6)));
-    }
-
-    @Test
-    public void empty()
-    {
-        assertThat(Monoid.mempty(), is(Product(1)));
-    }
-
-    @Test
-    public void monoid_concatenation()
-    {
-        assertThat(Monoid.mconcat(list(Product(2), Product(3), Product(4), Product(5))), is(Product(120)));
     }
 
     @Rule
@@ -61,5 +49,17 @@ public final class ProductTest
         // except
         exception.expect(IllegalArgumentException.class);
         assertThat(Semigroup.stimes(-1, Product(2)), anything());
+    }
+
+    @Test
+    public void empty()
+    {
+        assertThat(Monoid.mempty(), is(Product(1)));
+    }
+
+    @Test
+    public void monoid_concatenation()
+    {
+        assertThat(Monoid.mconcat(list(Product(2), Product(3), Product(4), Product(5))), is(Product(120)));
     }
 }
