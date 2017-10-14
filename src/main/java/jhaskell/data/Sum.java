@@ -1,5 +1,7 @@
 package jhaskell.data;
 
+import java.util.List;
+
 public class Sum implements Monoid<Sum>
 {
     public final Integer sum;
@@ -15,6 +17,12 @@ public class Sum implements Monoid<Sum>
     public Sum mempty()
     {
         return mempty;
+    }
+
+    @Override
+    public Sum mconcat(List<Sum> sums)
+    {
+        return null;
     }
 
     @Override

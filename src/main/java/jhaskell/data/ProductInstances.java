@@ -1,5 +1,7 @@
 package jhaskell.data;
 
+import java.util.List;
+
 public enum ProductInstances
 {
 
@@ -11,7 +13,7 @@ public enum ProductInstances
     {
 
         @Override
-        public Product mappend(final Product x, final Product y)
+        public Product mappend(Product x, Product y)
         {
             return new Product(x.product * y.product);
         }
@@ -22,12 +24,18 @@ public enum ProductInstances
 
     private static class ProductMonoid extends ProductSemigroup implements Monoid<Product>
     {
+        private static Product Empty = new Product(0);
 
         @Override
         public Product mempty()
         {
-            return new Product(0);
+            return Empty;
         }
 
+        @Override
+        public Product mconcat(List<Product> products)
+        {
+            return products.stream().reduce(Semigroup::mappend).orElse(Empty);
+        }
     }
 }

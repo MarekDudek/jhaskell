@@ -3,6 +3,7 @@ package jhaskell;
 import jhaskell.data.Product;
 import org.junit.Test;
 
+import static java.util.Arrays.asList;
 import static jhaskell.data.ProductInstances.Monoid;
 import static jhaskell.data.ProductInstances.Semigroup;
 import static org.hamcrest.Matchers.is;
@@ -12,7 +13,7 @@ public final class ProductTest
 {
 
     @Test
-    public void mappending_works_2()
+    public void appending_works()
     {
         // given
         final Product p1 = new Product(2);
@@ -25,7 +26,7 @@ public final class ProductTest
     }
 
     @Test
-    public void empty_value_works_2()
+    public void empty_value_works()
     {
         // when
         final Product p = Monoid.mempty();
@@ -34,4 +35,12 @@ public final class ProductTest
         assertThat(p.product, is(0));
     }
 
+    @Test
+    public void concatenation_works() {
+        // when
+        final Product p = Monoid.mconcat(asList(new Product(2), new Product(3), new Product(4), new Product(5)));
+        // then
+        assertThat(p, is(new Product(120)));
+        assertThat(p.product, is(120));
+    }
 }
