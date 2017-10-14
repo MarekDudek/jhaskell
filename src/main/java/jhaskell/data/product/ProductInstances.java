@@ -4,7 +4,8 @@ import jhaskell.data.Monoid;
 import jhaskell.data.Semigroup;
 
 import java.util.List;
-import java.util.stream.IntStream;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 public enum ProductInstances
 {
@@ -23,9 +24,23 @@ public enum ProductInstances
         }
 
         @Override
+        public Product sconcat(final List<Product> products)
+        {
+            return products.stream().reduce(Semigroup::mappend).orElseThrow(IllegalArgumentException::new);
+        }
+
+        @Override
         public Product stimes(int n, Product product)
         {
-            return IntStream.rangeClosed(1, n).mapToObj(i -> product).reduce(this::mappend).orElse(product);
+            checkArgument(n >= 0);
+            if (n == 0)
+                return Monoid.mempty();
+            else {
+                Integer p = product.product;
+                for (int i = 1; i < n; i++)
+                    p = p * product.product;
+                return new Product(p);
+            }
         }
 
     }
@@ -34,7 +49,7 @@ public enum ProductInstances
 
     private static class ProductMonoid extends ProductSemigroup implements Monoid<Product>
     {
-        private static Product Empty = new Product(0);
+        private static Product Empty = new Product(1);
 
         @Override
         public Product mempty()

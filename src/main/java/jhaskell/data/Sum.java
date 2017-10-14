@@ -32,6 +32,12 @@ public class Sum implements Monoid<Sum>
     }
 
     @Override
+    public Sum sconcat(List<Sum> sums)
+    {
+        return null;
+    }
+
+    @Override
     public Sum stimes(int i, Sum sum)
     {
         return null;
