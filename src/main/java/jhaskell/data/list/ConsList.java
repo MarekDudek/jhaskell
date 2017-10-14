@@ -1,31 +1,35 @@
 package jhaskell.data.list;
 
+import com.google.common.base.Preconditions;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public interface ConsList<A>
 {
+
     static <A> ConsList<A> nil()
     {
-        return Nil.nill();
+        return Nil.nil();
     }
 
-    static <A> ConsList<A> cons(A head, ConsList<A> tail)
+    static <A> ConsList<A> cons(final A head, final ConsList<A> tail)
     {
         return new Cons<>(head, tail);
     }
-
 }
 
-class Nil<A> implements ConsList<A>
+final class Nil<A> implements ConsList<A>
 {
     private static Nil Nil = new Nil();
 
     @SuppressWarnings("unchecked")
-    static <A> Nil<A> nill()
+    static <A> Nil<A> nil()
     {
         return (Nil<A>) Nil;
     }
 }
 
-class Cons<A> implements ConsList<A>
+final class Cons<A> implements ConsList<A>
 {
 
     public final A head;
@@ -33,7 +37,7 @@ class Cons<A> implements ConsList<A>
 
     Cons(A head, ConsList<A> tail)
     {
-        this.head = head;
-        this.tail = tail;
+        this.head = checkNotNull(head);
+        this.tail = checkNotNull(tail);
     }
 }
