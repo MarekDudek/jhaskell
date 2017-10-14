@@ -1,6 +1,10 @@
-package jhaskell.data;
+package jhaskell.data.product;
+
+import jhaskell.data.Monoid;
+import jhaskell.data.Semigroup;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public enum ProductInstances
 {
@@ -16,6 +20,12 @@ public enum ProductInstances
         public Product mappend(Product x, Product y)
         {
             return new Product(x.product * y.product);
+        }
+
+        @Override
+        public Product stimes(int n, Product product)
+        {
+            return IntStream.rangeClosed(1, n).mapToObj(i -> product).reduce(this::mappend).orElse(product);
         }
 
     }

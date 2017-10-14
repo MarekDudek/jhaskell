@@ -1,11 +1,11 @@
 package jhaskell;
 
-import jhaskell.data.Product;
+import jhaskell.data.product.Product;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
-import static jhaskell.data.ProductInstances.Monoid;
-import static jhaskell.data.ProductInstances.Semigroup;
+import static jhaskell.data.product.ProductInstances.Monoid;
+import static jhaskell.data.product.ProductInstances.Semigroup;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -42,5 +42,14 @@ public final class ProductTest
         // then
         assertThat(p, is(new Product(120)));
         assertThat(p.product, is(120));
+    }
+
+    @Test
+    public void multiplication_of_replication() {
+        // when
+        final Product p = Semigroup.stimes(3, new Product(2));
+        // then
+        assertThat(p, is(new Product(8)));
+        assertThat(p.product, is(8));
     }
 }
