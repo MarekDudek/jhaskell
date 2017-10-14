@@ -6,7 +6,8 @@ import org.junit.Test;
 public final class ConsListTest
 {
     @Test
-    public void nil() {
+    public void nil()
+    {
         //
         final ConsList<Integer> nil = ConsList.nil();
     }

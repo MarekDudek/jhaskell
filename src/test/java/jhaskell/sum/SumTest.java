@@ -4,10 +4,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static jhaskell.data.utils.Util.list;
 import static jhaskell.data.sum.Sum.Sum;
 import static jhaskell.data.sum.Sums.Monoid;
 import static jhaskell.data.sum.Sums.Semigroup;
+import static jhaskell.data.utils.Util.list;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -28,18 +28,16 @@ public final class SumTest
     @Test
     public void semigroup_concatenation()
     {
-        // then
         assertThat(Semigroup.sconcat(list(Sum(2))), is(Sum(2)));
         assertThat(Semigroup.sconcat(list(Sum(2), Sum(2))), is(Sum(4)));
         assertThat(Semigroup.sconcat(list(Sum(2), Sum(2), Sum(2))), is(Sum(6)));
         assertThat(Semigroup.sconcat(list(Sum(2), Sum(2), Sum(2), Sum(2))), is(Sum(8)));
-        // except
         exception.expect(IllegalArgumentException.class);
         assertThat(Semigroup.sconcat(list()), anything());
     }
 
     @Test
-    public void multiplication_of_replication()
+    public void multiplication()
     {
         // then
         assertThat(Semigroup.stimes(0, Sum(2)), is(Sum(0)));

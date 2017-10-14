@@ -9,9 +9,11 @@ public final class Product
 {
     public final Integer product;
 
-    public static Product Product(Integer product) {
+    public static Product Product(Integer product)
+    {
         return new Product(product);
     }
+
     public Product(Integer product)
     {
         this.product = product;

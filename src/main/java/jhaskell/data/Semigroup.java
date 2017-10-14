@@ -8,7 +8,10 @@ public interface Semigroup<A>
 {
     A mappend(A x, A y);
 
-    A sconcat(List<A> as);
+    default A sconcat(List<A> as)
+    {
+        return as.stream().reduce(this::mappend).orElseThrow(IllegalArgumentException::new);
+    }
 
     default A stimes(int n, A a)
     {

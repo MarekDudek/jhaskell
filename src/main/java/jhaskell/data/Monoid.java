@@ -6,5 +6,8 @@ public interface Monoid<A> extends Semigroup<A>
 {
     A mempty();
 
-    A mconcat(List<A> as);
+    default A mconcat(List<A> as)
+    {
+        return as.stream().reduce(this::mappend).orElse(mempty());
+    }
 }

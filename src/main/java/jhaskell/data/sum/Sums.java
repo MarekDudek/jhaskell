@@ -3,8 +3,6 @@ package jhaskell.data.sum;
 import jhaskell.data.Monoid;
 import jhaskell.data.Semigroup;
 
-import java.util.List;
-
 import static com.google.common.base.Preconditions.checkArgument;
 
 public enum Sums
@@ -21,12 +19,6 @@ public enum Sums
         public Sum mappend(Sum x, Sum y)
         {
             return new Sum(x.sum + y.sum);
-        }
-
-        @Override
-        public Sum sconcat(final List<Sum> sums)
-        {
-            return sums.stream().reduce(Semigroup::mappend).orElseThrow(IllegalArgumentException::new);
         }
 
         @Override
@@ -54,12 +46,6 @@ public enum Sums
         public Sum mempty()
         {
             return Empty;
-        }
-
-        @Override
-        public Sum mconcat(List<Sum> sums)
-        {
-            return sums.stream().reduce(this::mappend).orElse(mempty());
         }
     }
 }

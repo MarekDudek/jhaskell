@@ -3,8 +3,6 @@ package jhaskell.data.product;
 import jhaskell.data.Monoid;
 import jhaskell.data.Semigroup;
 
-import java.util.List;
-
 import static com.google.common.base.Preconditions.checkArgument;
 
 public enum Products
@@ -21,12 +19,6 @@ public enum Products
         public Product mappend(Product x, Product y)
         {
             return new Product(x.product * y.product);
-        }
-
-        @Override
-        public Product sconcat(final List<Product> products)
-        {
-            return products.stream().reduce(Semigroup::mappend).orElseThrow(IllegalArgumentException::new);
         }
 
         @Override
@@ -54,12 +46,6 @@ public enum Products
         public Product mempty()
         {
             return Empty;
-        }
-
-        @Override
-        public Product mconcat(List<Product> products)
-        {
-            return products.stream().reduce(this::mappend).orElse(mempty());
         }
     }
 }
