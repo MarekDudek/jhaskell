@@ -1,5 +1,6 @@
 package jhaskell.data.list;
 
+import jhaskell.data.Monoid;
 import jhaskell.data.Semigroup;
 
 import java.util.function.Function;
@@ -12,9 +13,14 @@ public enum ConsLists
 
     ;
 
-    public static final <A> Semigroup<ConsList<A>> Semigroup()
+    public static <A> Semigroup<ConsList<A>> Semigroup()
     {
         return new ConsListSemigroup<>();
+    }
+
+    public static <A> Monoid<ConsList<A>> Monoid()
+    {
+        return new ConsListMonoid<>();
     }
 
     private static class ConsListSemigroup<A> implements Semigroup<ConsList<A>>
@@ -23,7 +29,20 @@ public enum ConsLists
         @Override
         public ConsList<A> mappend(final ConsList<A> as, final ConsList<A> bs)
         {
-            return append(as, bs);
+            return match(as,
+                    nil -> bs,
+                    cons -> cons(cons.head, mappend(cons.tail, bs))
+            );
+        }
+    }
+
+    private static class ConsListMonoid<A> extends ConsListSemigroup<A> implements Monoid<ConsList<A>>
+    {
+
+        @Override
+        public ConsList<A> mempty()
+        {
+            return nil();
         }
     }
 
@@ -68,14 +87,6 @@ public enum ConsLists
         return match(as,
                 n -> nil(),
                 c -> cons(f.apply(c.head), map(c.tail, f))
-        );
-    }
-
-    public static <A> ConsList<A> append(final ConsList<A> xs, final ConsList<A> ys)
-    {
-        return match(xs,
-                nil -> ys,
-                cons -> cons(cons.head, append(cons.tail, ys))
         );
     }
 }
