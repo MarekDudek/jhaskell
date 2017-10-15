@@ -23,6 +23,8 @@ public enum ConsLists
         return new ConsListMonoid<>();
     }
 
+    ;
+
     private static class ConsListSemigroup<A> implements Semigroup<ConsList<A>>
     {
 

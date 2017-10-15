@@ -1,7 +1,10 @@
 package jhaskell.data.sum;
 
+import jhaskell.data.Foldable;
 import jhaskell.data.Monoid;
 import jhaskell.data.Semigroup;
+
+import java.util.function.BiFunction;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -12,9 +15,10 @@ public enum Sums
 
     public static Semigroup<Sum> Semigroup = new SumSemigroup();
 
+    public static Monoid<Sum> Monoid = new SumMonoid();
+
     private static class SumSemigroup implements Semigroup<Sum>
     {
-
         @Override
         public Sum mappend(Sum x, Sum y)
         {
@@ -34,9 +38,8 @@ public enum Sums
                 return new Sum(s);
             }
         }
-    }
 
-    public static Monoid<Sum> Monoid = new SumMonoid();
+    }
 
     private static class SumMonoid extends SumSemigroup implements Monoid<Sum>
     {
