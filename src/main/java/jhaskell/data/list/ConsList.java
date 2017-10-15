@@ -14,8 +14,8 @@ public interface ConsList<A>
 
     final class Cons<A> implements ConsList<A>
     {
-        final A head;
-        final ConsList<A> tail;
+        public final A head;
+        public final ConsList<A> tail;
 
         Cons(A head, ConsList<A> tail)
         {

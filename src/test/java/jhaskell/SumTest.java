@@ -7,6 +7,7 @@ import org.junit.rules.ExpectedException;
 import static jhaskell.data.sum.Sum.Sum;
 import static jhaskell.data.sum.Sums.Monoid;
 import static jhaskell.data.sum.Sums.Semigroup;
+import static jhaskell.data.utils.Util.consList;
 import static jhaskell.data.utils.Util.list;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
@@ -60,6 +61,6 @@ public final class SumTest
     @Test
     public void concatenation()
     {
-        assertThat(Monoid.mconcat(list(Sum(1), Sum(2), Sum(3), Sum(4), Sum(5))), is(Sum(15)));
+        assertThat(Monoid.mconcat(consList(Sum(1), Sum(2), Sum(3), Sum(4), Sum(5))), is(Sum(15)));
     }
 }

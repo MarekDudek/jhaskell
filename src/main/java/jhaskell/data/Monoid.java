@@ -1,13 +1,18 @@
 package jhaskell.data;
 
-import java.util.List;
+import jhaskell.data.list.ConsList;
+
+import static jhaskell.data.list.ConsList.pattern;
 
 public interface Monoid<A> extends Semigroup<A>
 {
     A mempty();
 
-    default A mconcat(List<A> as)
+    default A mconcat(ConsList<A> as)
     {
-        return as.stream().reduce(this::mappend).orElse(mempty());
+        return pattern(as,
+                nil -> mempty(),
+                cons -> mappend(cons.head, mconcat(cons.tail))
+        );
     }
 }

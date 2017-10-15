@@ -7,6 +7,7 @@ import org.junit.rules.ExpectedException;
 import static jhaskell.data.product.Product.Product;
 import static jhaskell.data.product.Products.Monoid;
 import static jhaskell.data.product.Products.Semigroup;
+import static jhaskell.data.utils.Util.consList;
 import static jhaskell.data.utils.Util.list;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
@@ -60,6 +61,6 @@ public final class ProductTest
     @Test
     public void monoid_concatenation()
     {
-        assertThat(Monoid.mconcat(list(Product(2), Product(3), Product(4), Product(5))), is(Product(120)));
+        assertThat(Monoid.mconcat(consList(Product(2), Product(3), Product(4), Product(5))), is(Product(120)));
     }
 }

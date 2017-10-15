@@ -7,6 +7,7 @@ import org.junit.rules.ExpectedException;
 import static jhaskell.data.any.Any.Any;
 import static jhaskell.data.any.Anys.Monoid;
 import static jhaskell.data.any.Anys.Semigroup;
+import static jhaskell.data.utils.Util.consList;
 import static jhaskell.data.utils.Util.list;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
@@ -53,6 +54,6 @@ public final class AnyTest
     @Test
     public void concatenation()
     {
-        assertThat(Monoid.mconcat(list(Any(false), Any(false), Any(true), Any(false))), is(Any(true)));
+        assertThat(Monoid.mconcat(consList(Any(false), Any(false), Any(true), Any(false))), is(Any(true)));
     }
 }
