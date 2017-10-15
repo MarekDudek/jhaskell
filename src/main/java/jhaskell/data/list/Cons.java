@@ -13,16 +13,4 @@ public final class Cons<A> implements ConsList<A>
         this.head = checkNotNull(head);
         this.tail = checkNotNull(tail);
     }
-
-    @Override
-    public Nil asNil()
-    {
-        return null;
-    }
-
-    @Override
-    public Cons<A> asCons()
-    {
-        return this;
-    }
 }
