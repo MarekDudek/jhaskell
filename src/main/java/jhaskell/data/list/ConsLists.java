@@ -1,12 +1,31 @@
 package jhaskell.data.list;
 
+import jhaskell.data.Semigroup;
+
 import java.util.function.Function;
 
 import static jhaskell.data.list.ConsList.*;
 import static jhaskell.data.utils.UglyStuff.error;
 
-public final class ConsLists
+public enum ConsLists
 {
+
+    ;
+
+    public static final <A> Semigroup<ConsList<A>> Semigroup()
+    {
+        return new ConsListSemigroup<>();
+    }
+
+    private static class ConsListSemigroup<A> implements Semigroup<ConsList<A>>
+    {
+
+        @Override
+        public ConsList<A> mappend(final ConsList<A> as, final ConsList<A> bs)
+        {
+            return append(as, bs);
+        }
+    }
 
     public static <A> A head(final ConsList<A> as)
     {
@@ -47,7 +66,8 @@ public final class ConsLists
     public static <A, B> ConsList<B> map(final ConsList<A> as, final Function<A, B> f)
     {
         return match(as,
-                n -> nil(), c -> cons(f.apply(c.head), map(c.tail, f))
+                n -> nil(),
+                c -> cons(f.apply(c.head), map(c.tail, f))
         );
     }
 

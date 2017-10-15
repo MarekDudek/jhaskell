@@ -4,9 +4,8 @@ import jhaskell.data.Semigroup;
 
 import static jhaskell.data.list.ConsList.cons;
 import static jhaskell.data.list.ConsList.nil;
-import static jhaskell.data.list.ConsLists.append;
-import static jhaskell.data.list.NonEmpty.multiple;
 import static jhaskell.data.list.NonEmpty.match;
+import static jhaskell.data.list.NonEmpty.multiple;
 
 public enum NonEmptys
 {
@@ -19,17 +18,19 @@ public enum NonEmptys
 
     private static class NonEmptySemigroup<A> implements Semigroup<NonEmpty<A>>
     {
+
         @Override
         public NonEmpty<A> mappend(final NonEmpty<A> as, final NonEmpty<A> bs)
         {
+            final Semigroup<ConsList<A>> S = ConsLists.Semigroup();
             return match(as,
-                    sa -> match(bs,
-                            sb -> multiple(cons(sa.single, cons(sb.single, nil()))),
-                            mb -> multiple(append(cons(sa.single, nil()), mb.multiple))
+                    a -> match(bs,
+                            b -> multiple(cons(a.single, cons(b.single, nil()))),
+                            bm -> multiple(S.mappend(cons(a.single, nil()), bm.multiple))
                     ),
-                    ma -> match(bs,
-                            sb -> multiple(append(ma.multiple, cons(sb.single, nil()))),
-                            mb -> multiple(append(ma.multiple, mb.multiple))
+                    am -> match(bs,
+                            b -> multiple(S.mappend(am.multiple, cons(b.single, nil()))),
+                            bm -> multiple(S.mappend(am.multiple, bm.multiple))
                     )
             );
         }

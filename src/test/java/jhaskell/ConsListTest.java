@@ -1,6 +1,8 @@
 package jhaskell;
 
+import jhaskell.data.Semigroup;
 import jhaskell.data.list.ConsList;
+import jhaskell.data.list.ConsLists;
 import org.junit.Test;
 
 import static jhaskell.data.list.ConsList.cons;
@@ -62,15 +64,18 @@ public final class ConsListTest
     @Test
     public void two_lists_can_be_appended()
     {
-        assertTrue(equal(append(nil(), nil()), nil()));
-        assertTrue(equal(append(nil(), cons(1, nil())), cons(1, nil())));
-        assertTrue(equal(append(cons(1, nil()), nil()), cons(1, nil())));
-        assertTrue(equal(append(cons(1, nil()), cons(2, nil())), cons(1, cons(2, nil()))));
+        // given
+        final Semigroup<ConsList<Integer>> S = ConsLists.Semigroup();
+        // then
+        assertTrue(equal(S.mappend(nil(), nil()), nil()));
+        assertTrue(equal(S.mappend(nil(), cons(1, nil())), cons(1, nil())));
+        assertTrue(equal(S.mappend(cons(1, nil()), nil()), cons(1, nil())));
+        assertTrue(equal(S.mappend(cons(1, nil()), cons(2, nil())), cons(1, cons(2, nil()))));
         // given
         final ConsList<Integer> as = cons(1, cons(2, cons(3, nil())));
         final ConsList<Integer> bs = cons(4, cons(5, cons(6, nil())));
         // when
-        final ConsList<Integer> cs = append(as, bs);
+        final ConsList<Integer> cs = S.mappend(as, bs);
         // then
         assertTrue(equal(cs, cons(1, cons(2, cons(3, cons(4, cons(5, cons(6, nil()))))))));
     }
