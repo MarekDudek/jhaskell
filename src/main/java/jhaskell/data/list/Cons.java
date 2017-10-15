@@ -2,11 +2,11 @@ package jhaskell.data.list;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public final class Cons<A> implements ConsList<A>
+final class Cons<A> implements ConsList<A>
 {
 
-    public final A head;
-    public final ConsList<A> tail;
+    final A head;
+    final ConsList<A> tail;
 
     Cons(A head, ConsList<A> tail)
     {

@@ -6,4 +6,9 @@ public class UglyStuff
     {
         throw new RuntimeException("error");
     }
+
+    public static <A> A error(String message)
+    {
+        throw new RuntimeException(message);
+    }
 }

@@ -2,8 +2,21 @@ package jhaskell.data.list;
 
 import java.util.function.Function;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static jhaskell.data.utils.UglyStuff.error;
+
 public interface ConsList<A>
 {
+
+    static <A> ConsList<A> nil()
+    {
+        return new Nil<>();
+    }
+
+    static <A> ConsList<A> cons(final A head, final ConsList<A> tail)
+    {
+        return new Cons<>(head, tail);
+    }
 
     static <A, B> B pattern
             (
@@ -12,27 +25,16 @@ public interface ConsList<A>
                     final Function<Cons<A>, B> cons
             )
     {
-
+        checkNotNull(as);
         if (as instanceof Nil) {
+            checkNotNull(nil);
             final Nil<A> n = (Nil<A>) as;
             return nil.apply(n);
-        } else {
+        } else if (as instanceof Cons) {
+            checkNotNull(cons);
             final Cons<A> c = (Cons<A>) as;
             return cons.apply(c);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    static <A> ConsList<A> nil()
-    {
-        return (Nil<A>) NIL;
-    }
-
-    Nil NIL = new Nil();
-
-    static <A> ConsList<A> cons(final A head, final ConsList<A> tail)
-    {
-        return new Cons<>(head, tail);
+        } else
+            return error();
     }
 }
-
