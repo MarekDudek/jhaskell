@@ -1,14 +1,17 @@
 package jhaskell.list;
 
 import jhaskell.data.list.ConsList;
+import jhaskell.data.list.ConsLists;
 import jhaskell.data.list.NonEmpty;
 import org.junit.Test;
 
 import static jhaskell.data.list.ConsList.cons;
 import static jhaskell.data.list.ConsList.nil;
 import static jhaskell.data.list.NonEmpty.multiple;
+import static jhaskell.data.list.NonEmpty.pattern;
 import static jhaskell.data.list.NonEmpty.single;
 import static jhaskell.data.list.NonEmptys.length;
+import static jhaskell.data.utils.UglyStuff.error;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -36,4 +39,35 @@ public final class NonEmptyTest
         assertThat(length(two), is(2));
         assertThat(length(three), is(3));
     }
+
+    @Test
+    public void pattern_matching_on_single()
+    {
+        // given
+        final NonEmpty<String> a = single("a");
+        // when
+        final Integer length = pattern(
+                a,
+                s -> 1,
+                m -> error()
+        );
+        // then
+        assertThat(length, is(1));
+    }
+
+    @Test
+    public void pattern_matching_on_multiple()
+    {
+        // given
+        final NonEmpty<String> a = multiple(cons("a", cons("b", cons("c", nil()))));
+        // when
+        final Integer length = pattern(
+                a,
+                s -> error(),
+                m -> ConsLists.length(m.multiple)
+        );
+        // then
+        assertThat(length, is(3));
+    }
+
 }
