@@ -30,8 +30,8 @@ public enum ConsLists
         public ConsList<A> mappend(final ConsList<A> as, final ConsList<A> bs)
         {
             return match(as,
-                    nil -> bs,
-                    cons -> cons(cons.head, mappend(cons.tail, bs))
+                    n -> bs,
+                    c -> cons(c.head, mappend(c.tail, bs))
             );
         }
     }

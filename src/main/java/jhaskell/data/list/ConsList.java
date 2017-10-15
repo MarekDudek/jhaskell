@@ -11,7 +11,8 @@ public interface ConsList<A>
     final class Nil<A> implements ConsList<A>
     {
         @Override
-        public String toString() {
+        public String toString()
+        {
             return "";
         }
     }
@@ -28,7 +29,8 @@ public interface ConsList<A>
         }
 
         @Override
-        public String toString() {
+        public String toString()
+        {
             final StringBuilder s = new StringBuilder();
             s.append(head.toString());
             if (tail instanceof Cons) {
