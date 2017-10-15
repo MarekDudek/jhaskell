@@ -1,4 +1,4 @@
-package jhaskell.list;
+package jhaskell;
 
 import jhaskell.data.list.ConsList;
 import org.junit.Test;

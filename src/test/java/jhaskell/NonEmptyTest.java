@@ -1,15 +1,14 @@
-package jhaskell.list;
+package jhaskell;
 
 import jhaskell.data.list.ConsList;
 import jhaskell.data.list.ConsLists;
 import jhaskell.data.list.NonEmpty;
+import jhaskell.data.list.NonEmptys;
 import org.junit.Test;
 
 import static jhaskell.data.list.ConsList.cons;
 import static jhaskell.data.list.ConsList.nil;
-import static jhaskell.data.list.NonEmpty.multiple;
-import static jhaskell.data.list.NonEmpty.pattern;
-import static jhaskell.data.list.NonEmpty.single;
+import static jhaskell.data.list.NonEmpty.*;
 import static jhaskell.data.list.NonEmptys.length;
 import static jhaskell.data.utils.UglyStuff.error;
 import static org.hamcrest.Matchers.is;
@@ -70,4 +69,14 @@ public final class NonEmptyTest
         assertThat(length, is(3));
     }
 
+    @Test
+    public void head_of()
+    {
+        // given
+        final NonEmpty<String> a = multiple(cons("a", cons("b", cons("c", nil()))));
+        // when
+        final String head = NonEmptys.head(a);
+        // then
+        assertThat(head, is("a"));
+    }
 }

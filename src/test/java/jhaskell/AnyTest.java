@@ -1,4 +1,4 @@
-package jhaskell.any;
+package jhaskell;
 
 import org.junit.Rule;
 import org.junit.Test;

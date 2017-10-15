@@ -10,16 +10,16 @@ public enum NonEmptys
     {
         return pattern(
                 as,
-                s -> null,
-                m -> null
+                s -> s.single,
+                m -> ConsLists.head(m.multiple)
         );
     }
 
     public static <A> int length(final NonEmpty<A> as)
     {
-        if (as instanceof Single)
+        if (as instanceof NonEmpty.Single)
             return 1;
-        final Multiple<A> m = (Multiple<A>) as;
+        final NonEmpty.Multiple<A> m = (NonEmpty.Multiple<A>) as;
         return ConsLists.length(m.multiple);
     }
 }

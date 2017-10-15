@@ -8,6 +8,22 @@ import static jhaskell.data.utils.UglyStuff.error;
 public interface ConsList<A>
 {
 
+    final class Nil<A> implements ConsList<A>
+    {
+    }
+
+    final class Cons<A> implements ConsList<A>
+    {
+        final A head;
+        final ConsList<A> tail;
+
+        Cons(A head, ConsList<A> tail)
+        {
+            this.head = checkNotNull(head);
+            this.tail = checkNotNull(tail);
+        }
+    }
+
     static <A> ConsList<A> nil()
     {
         return new Nil<>();

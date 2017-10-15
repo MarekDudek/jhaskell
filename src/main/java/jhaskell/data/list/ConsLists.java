@@ -3,9 +3,18 @@ package jhaskell.data.list;
 import java.util.function.Function;
 
 import static jhaskell.data.list.ConsList.*;
+import static jhaskell.data.utils.UglyStuff.error;
 
 public final class ConsLists
 {
+
+    public static <A> A head(final ConsList<A> as)
+    {
+        return pattern(as,
+                nil -> error("head empty"),
+                cons -> cons.head
+        );
+    }
 
     public static <A> boolean empty(final ConsList<A> as)
     {
