@@ -38,7 +38,7 @@ public interface NonEmpty<A>
         return new Multiple<>(as);
     }
 
-    static <A, B> B pattern
+    static <A, B> B match
             (
                     final NonEmpty<A> as,
                     final Function<Single<A>, B> single,

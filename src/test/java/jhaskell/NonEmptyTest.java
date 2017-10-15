@@ -45,7 +45,7 @@ public final class NonEmptyTest
         // given
         final NonEmpty<String> a = single("a");
         // when
-        final Integer length = pattern(
+        final Integer length = match(
                 a,
                 s -> 1,
                 m -> error()
@@ -60,7 +60,7 @@ public final class NonEmptyTest
         // given
         final NonEmpty<String> a = multiple(cons("a", cons("b", cons("c", nil()))));
         // when
-        final Integer length = pattern(
+        final Integer length = match(
                 a,
                 s -> error(),
                 m -> ConsLists.length(m.multiple)

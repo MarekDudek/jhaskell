@@ -10,6 +10,10 @@ public interface ConsList<A>
 
     final class Nil<A> implements ConsList<A>
     {
+        @Override
+        public String toString() {
+            return "";
+        }
     }
 
     final class Cons<A> implements ConsList<A>
@@ -21,6 +25,18 @@ public interface ConsList<A>
         {
             this.head = checkNotNull(head);
             this.tail = checkNotNull(tail);
+        }
+
+        @Override
+        public String toString() {
+            final StringBuilder s = new StringBuilder();
+            s.append(head.toString());
+            if (tail instanceof Cons) {
+                s.append(',');
+                s.append(tail.toString());
+            }
+
+            return s.toString();
         }
     }
 
@@ -34,7 +50,7 @@ public interface ConsList<A>
         return new Cons<>(head, tail);
     }
 
-    static <A, B> B pattern
+    static <A, B> B match
             (
                     final ConsList<A> as,
                     final Function<Nil<A>, B> nil,

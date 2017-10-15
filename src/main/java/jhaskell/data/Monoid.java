@@ -2,7 +2,7 @@ package jhaskell.data;
 
 import jhaskell.data.list.ConsList;
 
-import static jhaskell.data.list.ConsList.pattern;
+import static jhaskell.data.list.ConsList.match;
 
 public interface Monoid<A> extends Semigroup<A>
 {
@@ -10,7 +10,7 @@ public interface Monoid<A> extends Semigroup<A>
 
     default A mconcat(ConsList<A> as)
     {
-        return pattern(as,
+        return match(as,
                 nil -> mempty(),
                 cons -> mappend(cons.head, mconcat(cons.tail))
         );

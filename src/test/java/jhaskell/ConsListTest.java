@@ -34,6 +34,14 @@ public final class ConsListTest
     }
 
     @Test
+    public void string()
+    {
+        // given
+        final ConsList<Integer> ns = cons(1, cons(2, cons(3, nil())));
+        assertThat(ns.toString(), is("1,2,3"));
+    }
+
+    @Test
     public void mapping()
     {
         // given
@@ -49,5 +57,21 @@ public final class ConsListTest
         // given
         final ConsList<Integer> ns = cons(1, cons(2, cons(3, nil())));
         // when
+    }
+
+    @Test
+    public void two_lists_can_be_appended()
+    {
+        assertTrue(equal(append(nil(), nil()), nil()));
+        assertTrue(equal(append(nil(), cons(1, nil())), cons(1, nil())));
+        assertTrue(equal(append(cons(1, nil()), nil()), cons(1, nil())));
+        assertTrue(equal(append(cons(1, nil()), cons(2, nil())), cons(1, cons(2, nil()))));
+        // given
+        final ConsList<Integer> as = cons(1, cons(2, cons(3, nil())));
+        final ConsList<Integer> bs = cons(4, cons(5, cons(6, nil())));
+        // when
+        final ConsList<Integer> cs = append(as, bs);
+        // then
+        assertTrue(equal(cs, cons(1, cons(2, cons(3, cons(4, cons(5, cons(6, nil()))))))));
     }
 }
