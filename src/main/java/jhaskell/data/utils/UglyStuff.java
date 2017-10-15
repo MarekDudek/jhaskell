@@ -6,5 +6,4 @@ public class UglyStuff
     {
         throw new RuntimeException("error");
     }
-
 }

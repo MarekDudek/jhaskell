@@ -8,8 +8,8 @@ public interface ConsList<A>
     static <A, B> B pattern
             (
                     final ConsList<A> as,
-                    final Function<Cons<A>, B> cons,
-                    final Function<Nil<A>, B> nil
+                    final Function<Nil<A>, B> nil,
+                    final Function<Cons<A>, B> cons
             )
     {
 
