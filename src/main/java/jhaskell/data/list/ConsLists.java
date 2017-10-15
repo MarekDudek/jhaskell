@@ -31,21 +31,35 @@ public final class ConsLists
 
     public static <A> int length(final ConsList<A> as)
     {
-        if (empty(as))
-            return 0;
-        final Cons<A> c = (Cons<A>) as;
-        return 1 + length(c.tail);
+        return pattern(as,
+                c -> 1 + length(c.tail),
+                n -> 0
+        );
+    }
+
+    private static <A, B> B pattern(final ConsList<A> as, final Function<Cons<A>, B> cons, final Function<Nil<A>, B> nil)
+    {
+        if (empty(as)) {
+            final Nil<A> n = (Nil<A>) as;
+            return nil.apply(n);
+        } else {
+            final Cons<A> c = (Cons<A>) as;
+            return cons.apply(c);
+        }
     }
 
     public static <A> boolean equal(final ConsList<A> xs, final ConsList<A> ys)
     {
-        if (empty(xs) && empty(ys))
-            return true;
-        if ((empty(xs) && !empty(ys)) || (!empty(xs) && empty(ys)))
-            return false;
-        final Cons<A> cx = (Cons<A>) xs;
-        final Cons<A> cy = (Cons<A>) ys;
-        return cx.head.equals(cy.head) && equal(cx.tail, cy.tail);
+        return pattern(xs,
+                xc -> pattern(ys,
+                        yc -> xc.head.equals(yc.head) && equal(xc.tail, yc.tail),
+                        yn -> false
+                ),
+                xn -> pattern(ys,
+                        yc -> false,
+                        yn -> true
+                )
+        );
     }
 
     public static <A, B> ConsList<B> map(final ConsList<A> as, final Function<A, B> f)

@@ -1,12 +1,15 @@
 package jhaskell.list;
 
+import jhaskell.data.list.Cons;
 import jhaskell.data.list.ConsList;
+import jhaskell.data.list.Nil;
 import org.junit.Test;
 
 import static jhaskell.data.list.ConsList.cons;
 import static jhaskell.data.list.ConsList.nil;
+import static jhaskell.data.list.ConsLists.empty;
 import static jhaskell.data.list.ConsLists.*;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 public final class ConsListTest
@@ -41,5 +44,18 @@ public final class ConsListTest
         final ConsList<String> ss = map(ns, Object::toString);
         // then
         assertTrue(equal(ss, cons("1", cons("2", cons("3", nil())))));
+    }
+
+    @Test
+    public void pattern_matching()
+    {
+        // given
+        final ConsList<Integer> ns = cons(1, cons(2, cons(3, nil())));
+        // when
+        final Cons<Integer> c = ns.asCons();
+        final Nil n = ns.asNil();
+        // then
+        assertThat(c, notNullValue());
+        assertThat(n, nullValue());
     }
 }
